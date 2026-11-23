@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Pulse">
+<meta name="application-name" content="Pulse">
+<meta name="theme-color" content="#000000">
+<meta name="format-detection" content="telephone=no">
+<title>Pulse</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="paused">
+  <main id="view"></main>
+
+  <div id="mini" hidden>
+    <div class="mini-prog"><i id="mini-bar"></i></div>
+    <button class="mini-main" data-act="openPlayer" aria-label="Open player">
+      <div class="art sm" data-icon="music"><img id="mini-art" alt=""></div>
+      <div class="mini-text"><div id="mini-title" class="ellipsis"></div><div id="mini-artist" class="ellipsis"></div></div>
+    </button>
+    <button class="icon-btn" data-act="toggle" id="mini-play" aria-label="Play/Pause"></button>
+    <button class="icon-btn" data-act="next" data-icon="next" aria-label="Next"></button>
+  </div>
+
+  <nav id="tabs">
+    <button data-act="tab" data-tab="home" data-icon="home"><span>Home</span></button>
+    <button data-act="tab" data-tab="library" data-icon="library"><span>Library</span></button>
+    <button data-act="tab" data-tab="search" data-icon="search"><span>Search</span></button>
+  </nav>
+
+  <section id="player" aria-hidden="true">
+    <div class="np-bg"><img id="np-bg" alt=""></div>
+    <div class="np-shade"></div>
+    <div class="np-inner">
+      <div class="np-top np-drag">
+        <button class="icon-btn" data-act="closePlayer" data-icon="chevD" aria-label="Close player"></button>
+        <button class="np-from" data-act="fromCtx"><small>PLAYING FROM</small><span id="np-from" class="ellipsis"></span></button>
+        <button class="icon-btn" data-act="npMenu" data-icon="more" aria-label="More"></button>
+      </div>
+      <div class="np-stage" id="np-stage" data-mode="art">
+        <div class="np-art-wrap np-drag" id="np-art-wrap"><div class="art np-art" data-icon="music"><img id="np-art" alt=""></div></div>
+        <div class="np-lyrics" id="np-lyrics"></div>
+        <div class="np-queue" id="np-queue"></div>
+      </div>
+      <div class="np-meta">
+        <div class="np-titles">
+          <div id="np-title" class="np-title ellipsis"></div>
+          <button id="np-artist" class="np-artist ellipsis" data-act="npArtist"></button>
+        </div>
+        <button class="icon-btn np-like" data-act="npLike" id="np-like" aria-label="Love"></button>
+      </div>
+      <div class="np-seek">
+        <input type="range" class="seek" id="np-seek" min="0" max="1000" value="0" step="1" aria-label="Seek">
+        <div class="np-times"><span id="np-cur">0:00</span><span id="np-rem">-0:00</span></div>
+      </div>
+      <div class="np-controls">
+        <button class="icon-btn np-sm" data-act="shuffle" id="np-shuffle" data-icon="shuffle" aria-label="Shuffle"></button>
+        <button class="icon-btn np-lg" data-act="prev" data-icon="prev" aria-label="Previous"></button>
+        <button class="icon-btn np-xl" data-act="toggle" id="np-play" aria-label="Play/Pause"></button>
+        <button class="icon-btn np-lg" data-act="next" data-icon="next" aria-label="Next"></button>
+        <button class="icon-btn np-sm" data-act="repeat" id="np-repeat" aria-label="Repeat"></button>
+      </div>
+      <div class="np-bottom">
+        <button class="icon-btn" data-act="npMode" data-mode="lyrics" id="np-b-lyrics" data-icon="lyrics" aria-label="Lyrics"></button>
+        <button class="icon-btn" data-act="airplay" id="np-airplay" data-icon="airplay" aria-label="AirPlay"></button>
+        <button class="icon-btn np-timer" data-act="sleep" id="np-timer" data-icon="moon" aria-label="Sleep timer"><span id="np-timer-lbl"></span></button>
+        <button class="icon-btn" data-act="npMode" data-mode="queue" id="np-b-queue" data-icon="queue" aria-label="Queue"></button>
+      </div>
+    </div>
+  </section>
+
+  <div id="sheet-root"></div>
+  <div id="toast-root"></div>
+
+  <audio id="audio" playsinline webkit-playsinline preload="auto" x-webkit-airplay="allow"></audio>
+  <input type="file" id="file-input" accept="audio/*,.mp3,.m4a,.aac,.alac,.flac,.wav,.aif,.aiff,.caf" multiple hidden>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
